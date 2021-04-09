@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <template>
+      <header class="header">
+        <h1>Динамическое переключение между компонентами VUE</h1>
+      </header>
+      <main>
+        <component :is="currentView"></component>
+        <button @click="toggleComponents">Click on</button>
+      </main>
+    </template>
+
+  </div>
+
+  <script src="assets/js/vue.min.js"></script>
+
+  <script>
+    const BookComponent = {
+      template:
+        `
+        <p class="bookCmp">Book Component</p>
+      `
+    }
+    const FormComponent = {
+      template:
+        `
+        <p class="formCmp">Form Component</p>
+      `
+    }
+    const HeaderComponent = {
+      template:
+        `
+      <p class="headerCmp">Header Component</p>
+      `
+    }
+    const app = new Vue({
+      el: '#app',
+      components: {
+        BookComponent,
+        FormComponent,
+        HeaderComponent
+      },
+      data() {
+        return {
+          currentView: 'BookComponent'
+        }
+      },
+      methods: {
+        toggleComponents() {
+          if (this.currentView === HeaderComponent)
+            this.currentView = BookComponent
+          else this.currentView = this.currentView === BookComponent ?
+            FormComponent : HeaderComponent;
+        }
+      }
+
+    });
+
+
+  </script>
+</body>
+
+</html>
+<style>
+  ::before,
+  ::after,
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+button {
+  padding: 5px 20px;
+  border: none;
+  border-radius: 4px;
+  background: tomato;
+  cursor: pointer;
+}
+  .bookCmp,
+  .formCmp,
+  .headerCmp {
+    font-size: 18px;
+    padding: 10px;
+    font-weight: 600;
+    color: floralwhite;
+  }
+
+  .bookCmp {
+    background-color: blue;
+  }
+
+  .formCmp {
+    background-color: goldenrod;
+  }
+
+  .headerCmp {
+    background-color: tan;
+  }
+
+  ul,
+  li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: crimson;
+    color: #fff;
+  }
+
+  .header img {
+    margin-right: 20px;
+    max-width: 25px;
+  }
+
+  .product-container {
+    display: flex;
+  }
+
+  .product-item {
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    max-height: 360px;
+    overflow: hidden;
+  }
+
+  .product-item img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .button {
+    background: #333;
+    color: #fff;
+    padding: 4px 16px;
+    border-radius: 5px;
+  }
+
+  .order-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+  }
+
+  .order-container input {
+    margin-bottom: 10px;
+    border-radius: 4px;
+    padding: 4px 2px;
+  }
+
+  .order-container input::placeholder {
+    padding-left: 6px;
+  }
+
+  .container-btn {
+    margin-top: 10px;
+    display: block;
+  }
+
+  .container-city select {
+    padding: 0 30px 0 0;
+  }
+
+  .container-view-order {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px dashed #333;
+  }
+
+  .container-more {
+    padding: 20px 0;
+  }
+
+  .description {
+    padding: 10px 0 0;
+    line-height: 24px;
+    text-align: left;
+  }
+
+  .warn {
+    font-size: 16px;
+    font-weight: 700;
+    color: crimson;
+  }
+</style>
